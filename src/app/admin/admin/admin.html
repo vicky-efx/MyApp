@@ -1,0 +1,33 @@
+<div class="admin-page">
+  <div class="admin-container">
+
+    <h2>Admin Panel — Send Image</h2>
+
+    <!-- Users checkbox list -->
+    <div class="user-list">
+      <h3>Select Users</h3>
+
+      <div class="user-item" *ngFor="let u of users">
+        <input type="checkbox"
+               [value]="u.id"
+               (change)="toggleUser($event)">
+        <label>{{ u.name }}</label>
+      </div>
+    </div>
+
+    <!-- File Input -->
+    <div class="file-input-wrapper">
+      <input type="file" (change)="onFileChange($event)">
+    </div>
+
+    <!-- Send Button -->
+    <button class="send-btn" (click)="send()">Send Image</button>
+
+    <!-- Response Message -->
+    <p class="response-message"
+       [ngClass]="{ 'success': message.includes('success'), 'error': message.includes('Failed') }">
+       {{ message }}
+    </p>
+
+  </div>
+</div>

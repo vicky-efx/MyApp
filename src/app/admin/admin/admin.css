@@ -1,0 +1,128 @@
+/* FULL-PAGE LAYOUT */
+.admin-page {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2f3 0%, #d9e7ff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* MAIN CONTAINER */
+.admin-container {
+  width: 100%;
+  max-width: 550px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  font-family: Arial, sans-serif;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* HEADER */
+.admin-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+/* USER LIST */
+.user-list {
+  margin-bottom: 25px;
+  border: 1px solid #ccc;
+  padding: 18px;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.user-list h3 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  color: #444;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.user-item input[type="checkbox"] {
+  margin-right: 12px;
+  transform: scale(1.2);
+}
+
+/* FILE INPUT */
+.file-input-wrapper {
+  margin: 25px 0;
+  text-align: center;
+}
+
+.file-input-wrapper input[type="file"] {
+  font-size: 16px;
+}
+
+/* BUTTON */
+.send-btn {
+  width: 100%;
+  padding: 14px;
+  background: #007bff;
+  border: none;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.send-btn:hover {
+  background: #0056b3;
+}
+
+/* RESPONSE MESSAGE */
+.response-message {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.response-message.success {
+  color: green;
+}
+
+.response-message.error {
+  color: red;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  .admin-container {
+    padding: 20px;
+  }
+
+  .admin-container h2 {
+    font-size: 22px;
+  }
+
+  .send-btn {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .user-item {
+    font-size: 14px;
+  }
+}
+
+/* FADE IN EFFECT */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

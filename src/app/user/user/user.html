@@ -1,0 +1,14 @@
+<h2>Your Images</h2>
+
+<div class="image-container" *ngIf="images.length === 0">
+  No images available.
+</div>
+
+<div class="image-grid">
+  <div class="image-card" *ngFor="let img of images">
+    <img [src]="img.imagePath" alt="User Image" style="width:100%; height:auto;">
+    <div class="image-info">
+      <p>{{ img.createdAt | date:'medium' }}</p>
+    </div>
+  </div>
+</div>
