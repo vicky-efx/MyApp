@@ -1,14 +1,32 @@
-<h2>Your Images</h2>
+<div class="user-page">
 
-<div class="image-container" *ngIf="images.length === 0">
-  No images available.
-</div>
-
-<div class="image-grid">
-  <div class="image-card" *ngFor="let img of images">
-    <img [src]="img.imagePath" alt="User Image" style="width:100%; height:auto;">
-    <div class="image-info">
-      <p>{{ img.createdAt | date:'medium' }}</p>
-    </div>
+  <!-- HEADER -->
+  <div class="user-header">
+    <h2>Your Images</h2>
+    <button class="logout-btn" (click)="logout()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i>
+      Logout
+    </button>
   </div>
+
+  <!-- BODY -->
+  <div class="user-body">
+
+    <!-- No images message -->
+    <div class="no-images" *ngIf="images.length === 0">
+      No images available.
+    </div>
+
+    <!-- Images grid -->
+    <div class="image-grid" *ngIf="images.length > 0">
+      <div class="image-card" *ngFor="let img of images">
+        <img [src]="img.imagePath" alt="User Image">
+        <div class="image-info">
+          <p>{{ img.createdAt | date:'medium' }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>

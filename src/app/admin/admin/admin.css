@@ -1,93 +1,167 @@
-/* FULL-PAGE LAYOUT */
-.admin-page {
-  width: 100%;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #eef2f3 0%, #d9e7ff 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
+/* =======================
+   FULL ADMIN PAGE LAYOUT
+   ======================= */
 
-/* MAIN CONTAINER */
-.admin-container {
-  width: 100%;
-  max-width: 550px;
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  font-family: Arial, sans-serif;
-  animation: fadeIn 0.3s ease-in-out;
+/* RESET */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f8;
 }
 
 /* HEADER */
-.admin-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 28px;
-  color: #333;
-  letter-spacing: 1px;
+.admin-header {
+  width: 100vw;
+  box-sizing: border-box;
+  background: #007bff;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.admin-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.logout-btn {
+  background: #f44336;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #d32f2f;
+}
+
+/* MAIN BODY */
+.admin-body {
+  margin-top: 70px;
+  /* height of fixed header */
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 30px;
+  min-height: calc(100vh - 70px);
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #f4f6f8, #e0e7ff);
+
 }
 
 /* USER LIST */
 .user-list {
-  margin-bottom: 25px;
-  border: 1px solid #ccc;
-  padding: 18px;
+  background: #fff;
   border-radius: 10px;
-  background: #fafafa;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .user-list h3 {
   margin: 0 0 12px 0;
   font-size: 20px;
-  color: #444;
+  color: #333;
 }
 
 .user-item {
   display: flex;
   align-items: center;
-  margin: 10px 0;
-  font-size: 16px;
+  gap: 12px;
 }
 
 .user-item input[type="checkbox"] {
-  margin-right: 12px;
   transform: scale(1.2);
 }
 
-/* FILE INPUT */
-.file-input-wrapper {
-  margin: 25px 0;
-  text-align: center;
+/* FILE UPLOAD */
+.file-upload-wrapper {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
 }
 
-.file-input-wrapper input[type="file"] {
-  font-size: 16px;
-}
-
-/* BUTTON */
-.send-btn {
-  width: 100%;
-  padding: 14px;
+.file-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   background: #007bff;
-  border: none;
-  font-size: 20px;
-  border-radius: 10px;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.file-upload-btn:hover {
+  background: #0056b3;
+}
+
+.file-upload-btn input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload-name {
+  font-size: 14px;
+  color: #333;
+}
+
+/* SEND BUTTON */
+.send-btn {
+  width: 250px;
+  padding: 14px;
+  background: linear-gradient(90deg, #28a745, #2ecc71);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: none;
+  font-size: 18px;
+  border-radius: 8px;
   color: white;
   font-weight: bold;
+  cursor: pointer;
+  align-self: center;
   transition: 0.3s;
 }
 
 .send-btn:hover {
-  background: #0056b3;
+  transform: translateY(-2px);
+  background: #218838;
 }
 
 /* RESPONSE MESSAGE */
 .response-message {
-  margin-top: 20px;
   text-align: center;
   font-size: 17px;
   font-weight: bold;
@@ -101,28 +175,120 @@
   color: red;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 600px) {
-  .admin-container {
+/* SCROLLBAR STYLING */
+.user-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.user-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .admin-body {
     padding: 20px;
   }
 
-  .admin-container h2 {
-    font-size: 22px;
-  }
-
   .send-btn {
-    font-size: 18px;
-    padding: 12px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-header h2 {
+    font-size: 20px;
   }
 
-  .user-item {
+  .logout-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .file-upload-btn {
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-header h2 {
+    font-size: 18px;
+  }
+
+  .logout-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+/* USER TABLE STYLES */
+.user-table-wrapper {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.user-table-wrapper h3 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  color: #333;
+  flex: 2;
+  min-width: 300px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+  border-bottom: 2px solid #0056b3;
+}
+
+.user-table tr:hover {
+  background: #f1f7ff;
+}
+
+.user-table tbody tr:hover {
+  background: #f1f7ff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+.user-table input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+  .user-table th,
+  .user-table td {
+    padding: 10px 8px;
     font-size: 14px;
   }
 }
 
-/* FADE IN EFFECT */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (max-width: 480px) {
+
+  .user-table th,
+  .user-table td {
+    font-size: 12px;
+  }
 }

@@ -7,17 +7,15 @@
       <i class="icon fas fa-envelope"></i>
     </div>
 
-    <div class="input-group">
-      <input type="password" [(ngModel)]="password" placeholder="Password" required>
-      <i class="icon fas fa-lock"></i>
+    <div class="input-group password-group">
+      <input [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" placeholder="Password" required>
+      <i class="fas toggle-password" 
+         [ngClass]="hidePassword ? 'fa-eye' : 'fa-eye-slash'" 
+         (click)="hidePassword = !hidePassword"></i>
     </div>
 
     <button (click)="login()">Login</button>
-
+    
     <p class="error-msg" *ngIf="error">{{ error }}</p>
-
-    <p class="signup-text">
-      Don't have an account? <a routerLink="/register">Sign Up</a>
-    </p>
   </div>
 </div>

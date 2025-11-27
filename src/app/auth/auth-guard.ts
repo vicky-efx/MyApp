@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const requiredRole = route.data['role'];
@@ -20,6 +20,6 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    return true;
+    return true; // User is logged in and has the correct role
   }
 }

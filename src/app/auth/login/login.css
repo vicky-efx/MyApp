@@ -42,12 +42,13 @@
 
 .input-group input {
   width: 100%;
-  padding: 14px 40px 14px 15px; /* Left padding for text, right for icon */
+  padding: 14px 40px 14px 15px;
+  /* padding-right for icon */
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 15px;
   outline: none;
-  box-sizing: border-box; /* Prevent overflow */
+  box-sizing: border-box;
   transition: 0.3s;
 }
 
@@ -59,11 +60,12 @@
 /* Icons inside input */
 .input-group .icon {
   position: absolute;
-  right: 12px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   color: #aaa;
-  pointer-events: none; /* Avoid icon blocking typing */
+  pointer-events: none;
+  /* Avoid icon blocking typing */
 }
 
 /* Ensure text doesn't overlap icon */
@@ -77,6 +79,20 @@
 
 .input-group input::placeholder {
   color: #aaa;
+}
+
+.password-group .toggle-password {
+  position: absolute;
+  right: 15px;
+  /* inside the input */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+}
+
+.password-group .toggle-password:hover {
+  color: #667eea;
 }
 
 /* Login Button */

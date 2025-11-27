@@ -34,7 +34,6 @@ export class UserService {
     const fd = new FormData();
     fd.append('file', file);
 
-    // Append multiple userIds correctly
     userIds.forEach(id => fd.append('userIds', id.toString()));
 
     return this.http.post(

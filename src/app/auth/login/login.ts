@@ -12,8 +12,16 @@ export class LoginComponent {
   email = '';
   password = '';
   error = '';
+   hidePassword = true;
 
   constructor(private Auth: AuthService, private router: Router) { }
+
+  ngOnInit() {
+    const user = this.Auth.getCurrentUser();
+    if (user) {
+      this.router.navigate([user.role === 'ADMIN' ? '/admin' : '/user']);
+    }
+  }
 
   login() {
     this.Auth.login(this.email, this.password).subscribe({

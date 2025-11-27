@@ -15,7 +15,7 @@ export interface UserPayload {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements CanActivate {
+export class AuthService {
   currentUser$ = new BehaviorSubject<UserPayload | null>(null);
   private isBrowser: boolean = false;
 
@@ -26,9 +26,8 @@ export class AuthService implements CanActivate {
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
 
-    // Only load from localStorage in browser
     if (this.isBrowser) {
-      const raw = localStorage.getItem('currentUser');
+      const raw = sessionStorage.getItem('currentUser');
       if (raw) this.currentUser$.next(JSON.parse(raw));
     }
   }
@@ -37,28 +36,19 @@ export class AuthService implements CanActivate {
   }
 
   login(email: string, password: string) {
-    return this.http.post<UserPayload>(`${environment.apiUrl}/auth/login`, {
-      email,
-      password,
-    });
+    return this.http.post<UserPayload>(`${environment.apiUrl}/auth/login`, { email, password });
   }
 
   setUser(user: UserPayload) {
     this.currentUser$.next(user);
-
-    // Safe in browser only
     if (this.isBrowser) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
     }
   }
 
   logout() {
     this.currentUser$.next(null);
-
-    if (this.isBrowser) {
-      localStorage.removeItem('currentUser');
-    }
-
+    if (this.isBrowser) sessionStorage.removeItem('currentUser');
     this.router.navigate(['/']);
   }
 

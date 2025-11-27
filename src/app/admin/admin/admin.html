@@ -1,33 +1,53 @@
-<div class="admin-page">
-  <div class="admin-container">
+<!-- HEADER -->
+<div class="admin-header">
+  <h2>Admin Panel</h2>
+  <button class="logout-btn" (click)="logout()">
+    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+  </button>
+</div>
 
-    <h2>Admin Panel — Send Image</h2>
+<!-- BODY -->
+<div class="admin-body">
 
-    <!-- Users checkbox list -->
-    <div class="user-list">
-      <h3>Select Users</h3>
-
-      <div class="user-item" *ngFor="let u of users">
-        <input type="checkbox"
-               [value]="u.id"
-               (change)="toggleUser($event)">
-        <label>{{ u.name }}</label>
-      </div>
-    </div>
-
-    <!-- File Input -->
-    <div class="file-input-wrapper">
-      <input type="file" (change)="onFileChange($event)">
-    </div>
-
-    <!-- Send Button -->
-    <button class="send-btn" (click)="send()">Send Image</button>
-
-    <!-- Response Message -->
-    <p class="response-message"
-       [ngClass]="{ 'success': message.includes('success'), 'error': message.includes('Failed') }">
-       {{ message }}
-    </p>
-
+  <!-- Users Table -->
+  <div class="user-table-wrapper">
+    <h3>Select Users</h3>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td><input type="checkbox" [value]="u.id" (change)="toggleUser($event)"></td>
+          <td>{{ u.name }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.role }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <!-- File Upload -->
+  <div class="file-upload-wrapper">
+    <label class="file-upload-btn">
+      <i class="fa fa-upload"></i> Choose File
+      <input type="file" (change)="onFileChange($event)">
+    </label>
+    <span class="file-upload-name" *ngIf="selectedFile">{{ selectedFile.name }}</span>
+  </div>
+
+  <!-- Send Button -->
+  <button class="send-btn" (click)="send()">Send Image</button>
+
+  <!-- Response Message -->
+  <p class="response-message"
+    [ngClass]="{ 'success': message.includes('success'), 'error': message.includes('Failed') }">
+    {{ message }}
+  </p>
+
 </div>

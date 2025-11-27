@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth-service';
-import { Websocket } from '../../services/websocket';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/userService';
 
@@ -11,7 +10,7 @@ import { UserService } from '../../services/userService';
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
-export class UserComponent {
+export class UserComponent implements OnInit, OnDestroy {
   userId!: number;
   images: any[] = [];
   wsSub!: Subscription;
@@ -19,15 +18,14 @@ export class UserComponent {
   constructor(
     private auth: AuthService,
     private userService: UserService,
-    private ws: Websocket
+    private cd: ChangeDetectorRef
+
   ) { }
 
   ngOnInit() {
     const user = this.auth.getCurrentUser();
-    this.userId = user!.id;
-
-    console.log('user',user)
-    console.log('ID',this.userId)
+    if (!user) return;  // safety check
+    this.userId = user.id;
 
     this.loadImages();
   }
@@ -36,10 +34,22 @@ export class UserComponent {
     this.userService.getUserImages(this.userId).subscribe(res => {
       this.images = res.map((img: any) => ({
         ...img,
-        imagePath: img.imagePath || img.url || img  // adjust if your API returns the full string directly
+        imagePath: "data:image/jpeg;base64," + img.base64Image
       }));
       console.log("Images loaded:", this.images);
+
+      // Force Angular to update view
+      this.cd.detectChanges();
     });
+  }
+
+  logout() {
+    this.auth.logout();
+  }
+
+
+  ngOnDestroy() {
+    if (this.wsSub) this.wsSub.unsubscribe();
   }
 
 }
